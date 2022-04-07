@@ -10,7 +10,7 @@ import java.util.List;
 public class DbService {
     private static volatile DbService instance = null;
 
-    // TODO Logger declaration
+    Logger logger = Logger.getInstance();
     private List<Cat> cats = new ArrayList<>();
     private List<Dog> dogs = new ArrayList<>();
 
@@ -33,20 +33,20 @@ public class DbService {
 
     public void addNewDog(Dog dog) {
         dogs.add(dog);
-        Logger.debug("BdService.Dog added");
+        logger.debug("BdService.Dog added");
     }
     public void addNewCat(Cat cat) {
         cats.add(cat);
-        Logger.debug("BdService.Cat added");
+        logger.debug("BdService.Cat added");
     }
 
     public List<Cat> getCats() {
-        Logger.debug("BdService.Get " + cats.size() + " cats");
+        logger.debug("BdService.Get " + cats.size() + " cats");
         return new ArrayList<>(cats);
     }
 
     public List<Dog> getDogs() {
-        Logger.debug("BdService.Get " + cats.size() + " dogs");
+        logger.debug("BdService.Get " + cats.size() + " dogs");
         return new ArrayList<>(dogs);
     }
 }

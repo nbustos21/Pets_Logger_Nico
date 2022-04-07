@@ -1,9 +1,32 @@
 package com.kreitek.pets.controllers;
 
 public class Logger {
-    private static int counter = 0;
-    public static void debug(String result){
-        counter+=1;
-        System.out.println("[debug]["+counter+"]"+result);
+    private static volatile Logger instance = null;
+    private int count = 0;
+
+    private Logger() {
+        if (instance != null) {
+            throw new RuntimeException("Usage getInstance() method to create");
+        }
+    }
+
+    public static Logger getInstance() {
+        if (instance == null) {
+            synchronized(Logger.class) {
+                if (instance == null) {
+                    instance = new Logger();
+                }
+            }
+        }
+        return instance;
+    }
+
+    public void debug(String data){
+        System.out.println("[debug][" + getCount() + "]" + data);
+    }
+
+    public int getCount(){
+        count ++;
+        return count;
     }
 }
